@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Bride?</title>
+    <style>
+        body {
+            background-color: #fff0f5;
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .rings {
+            position: fixed;
+            top: -1em;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ring {
+            position: absolute;
+            animation: fall 8s linear infinite;
+            opacity: 0.8;
+            font-size: 24px;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border: 3px solid #d8bfd8;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(216, 191, 216, 0.5);
+        }
+
+        .button-container {
+            margin: 40px 0;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .action-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        #yesButton {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            font-weight: bold;
+        }
+
+        #noButton {
+            background: linear-gradient(45deg, #d3d3d3, #a9a9a9);
+            color: white;
+            position: relative;
+        }
+
+        h2 {
+            color: #c71585;
+            font-size: 2.5em;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(199, 21, 133, 0.2);
+        }
+
+        .love-message {
+            font-size: 2em;
+            color: #c71585;
+            margin-top: 30px;
+            animation: pulse 1s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .bridal-theme {
+            color: #c71585;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .diamond {
+            color: #b9f2ff;
+            text-shadow: 0 0 5px #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="rings" id="ringsContainer"></div>
+
+    <div class="container">
+        <section>
+            <h2>Will You BE THIS NIGA'S FIANCE? <span class="diamond">💍</span></h2>
+            <img src="1000028318.jpg" alt="Our Special Memory" class="main-image">
+        </section>
+
+        <div class="button-container">
+            <button id="yesButton" class="action-button">YES! I WILL! 💖</button>
+            <button id="noButton" class="action-button">No 😢</button>
+        </div>
+        <div id="loveMessage" class="love-message"></div>
+    </div>
+
+    <script>
+        function createRings(count = 30) {
+            const container = document.getElementById('ringsContainer');
+            for (let i = 0; i < count; i++) {
+                const ring = document.createElement('div');
+                ring.innerHTML = '💍';
+                ring.className = 'ring';
+                ring.style.left = Math.random() * 100 + '%';
+                ring.style.animationDelay = Math.random() * 5 + 's';
+                ring.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(ring);
+            }
+        }
+        createRings();
+
+        // No button movement
+        const noButton = document.getElementById('noButton');
+        noButton.addEventListener('mouseover', moveButton);
+        noButton.addEventListener('click', moveButton);
+
+        function moveButton() {
+            const newX = Math.random() * (window.innerWidth - 150);
+            const newY = Math.random() * (window.innerHeight - 150);
+            noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+            setTimeout(() => {
+                noButton.style.transform = 'translate(0, 0)';
+            }, 500);
+        }
+
+        // Yes button action
+        const yesButton = document.getElementById('yesButton');
+        const loveMessage = document.getElementById('loveMessage');
+        
+        yesButton.addEventListener('click', () => {
+            createRings(100);
+            loveMessage.textContent = "MY FUTURE BRIDE! 💍👰 I LOVE YOU!";
+            yesButton.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                yesButton.style.transform = 'scale(1)';
+            }, 300);
+            
+            // Add romantic animations
+            document.body.style.background = "linear-gradient(45deg, #fff0f5, #ffe4e1)";
+            const rings = document.querySelectorAll('.ring');
+            rings.forEach(ring => {
+                ring.style.animationDuration = '3s';
+            });
+            
+            // Add diamond ring effect
+            const diamondRing = document.createElement('div');
+            diamondRing.innerHTML = '💍';
+            diamondRing.style.position = 'fixed';
+            diamondRing.style.top = '50%';
+            diamondRing.style.left = '50%';
+            diamondRing.style.transform = 'translate(-50%, -50%)';
+            diamondRing.style.fontSize = '100px';
+            diamondRing.style.zIndex = '100';
+            diamondRing.style.animation = 'pulse 1s infinite';
+            document.body.appendChild(diamondRing);
+            
+            setTimeout(() => {
+                diamondRing.remove();
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
